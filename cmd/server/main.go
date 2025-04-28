@@ -5,9 +5,11 @@ import (
 	"net/http"
 
 	handler "github.com/Matthieu114/startup-idea-validator/internal/handlers"
+	"github.com/joho/godotenv"
 )
 
 func main() {
+
 	router := http.NewServeMux()
 	router.HandleFunc("POST /validate", handler.ValidateIdeaHandler)
 
@@ -18,3 +20,12 @@ func main() {
 	}
 
 }
+
+func init() {
+    // Try to load the .env file, but ignore errors if it doesn't exist
+    err := godotenv.Load()
+    if err != nil {
+        log.Println("No .env file found (this is normal in production)")
+    }
+}
+
