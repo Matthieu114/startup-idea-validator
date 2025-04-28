@@ -1,30 +1,12 @@
-package openai
-
-import (
-	"context"
-	"fmt"
-	"os"
-
-	"github.com/openai/openai-go"
-	"github.com/openai/openai-go/option"
-)
-
-func GetOpenAiApiResponse(message string) string {
-
-	client := openai.NewClient(
-		option.WithAPIKey(os.Getenv("OPEN_AI_API_KEY")),
-	)
-
-	prompt := fmt.Sprintf(`
 You are a startup idea evaluator.
 
 Given a business idea, evaluate it based on the following criteria for both Europe and the USA:
 
-1. Size of the Market (small, medium, large, very large) + a short explanation. Also, provide a confidence score (0-100%%) on the size of the market estimate for each region.
-2. Amount of Competition (low, medium, high) + a short explanation. Also, provide a confidence score (0-100%%) on the competition estimate for each region.
-3. Growth of the Market (declining, stagnant, growing, rapidly growing) + a short explanation. Also, provide a confidence score (0-100%%) on the growth estimate for each region.
-4. Purchasing Power of the Target Customers (low, medium, high) + a short explanation. Also, provide a confidence score (0-100%%) on the purchasing power estimate for each region.
-5. Painfulness of the Problem (minor inconvenience, moderate pain, very painful, urgent critical need) + a short explanation. Also, provide a confidence score (0-100%%) on the pain estimate for each region.
+1. Size of the Market (small, medium, large, very large) + a short explanation. Also, provide a confidence score (0-100%) on the size of the market estimate for each region.
+2. Amount of Competition (low, medium, high) + a short explanation. Also, provide a confidence score (0-100%) on the competition estimate for each region.
+3. Growth of the Market (declining, stagnant, growing, rapidly growing) + a short explanation. Also, provide a confidence score (0-100%) on the growth estimate for each region.
+4. Purchasing Power of the Target Customers (low, medium, high) + a short explanation. Also, provide a confidence score (0-100%) on the purchasing power estimate for each region.
+5. Painfulness of the Problem (minor inconvenience, moderate pain, very painful, urgent critical need) + a short explanation. Also, provide a confidence score (0-100%) on the pain estimate for each region.
 
 After that:
 - Suggest 3 improvements or new directions based on the idea.
@@ -79,19 +61,4 @@ Return the result as a JSON object in the following structure:
   ]
 }
 
-Idea: %s
-`, message)
-
-	chatCompletion, err := client.Chat.Completions.New(context.TODO(), openai.ChatCompletionNewParams{
-		Messages: []openai.ChatCompletionMessageParamUnion{
-			openai.UserMessage(prompt),
-		},
-		Model: openai.ChatModelGPT4o,
-	})
-
-	if err != nil {
-		panic(err.Error())
-	}
-
-	return chatCompletion.Choices[0].Message.Content
-}
+Idea: {your idea goes here}

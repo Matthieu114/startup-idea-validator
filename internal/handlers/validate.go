@@ -59,3 +59,4 @@ func ValidateIdeaHandler(w http.ResponseWriter, r *http.Request) {
 	3. Competition / products that already exist (this will need to be scraped / found off the web idk how yet)
 
 */
+
