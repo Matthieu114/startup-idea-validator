@@ -4,12 +4,12 @@ import (
 	"log"
 	"net/http"
 
-	validate "github.com/Matthieu114/startup-idea-validator/internal/handlers"
+	handler "github.com/Matthieu114/startup-idea-validator/internal/handlers"
 )
 
 func main() {
 	router := http.NewServeMux()
-	router.HandleFunc("POST /validate", validate.ReceiveAndLogJSON)
+	router.HandleFunc("POST /validate", handler.ValidateIdeaHandler)
 
 	err := http.ListenAndServe(":8000", router)
 
