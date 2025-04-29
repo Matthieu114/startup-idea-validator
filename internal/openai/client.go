@@ -77,14 +77,12 @@ Return the result as a JSON object in the following structure:
       "description": "Official USDA listing of markets in the United States."
     }
   ]
-}
+}`)
 
-Idea: %s
-`, message)
-
-	chatCompletion, err := client.Chat.Completions.New(context.TODO(), openai.ChatCompletionNewParams{
+	chatCompletion, err := client.Chat.Completions.New(context.Background(), openai.ChatCompletionNewParams{
 		Messages: []openai.ChatCompletionMessageParamUnion{
-			openai.UserMessage(prompt),
+			openai.SystemMessage(prompt),
+			openai.UserMessage(message),
 		},
 		Model: openai.ChatModelGPT4o,
 	})
