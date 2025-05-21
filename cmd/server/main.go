@@ -22,10 +22,9 @@ func main() {
 }
 
 func init() {
-    // Try to load the .env file, but ignore errors if it doesn't exist
-    err := godotenv.Load()
-    if err != nil {
-        log.Println("No .env file found (this is normal in production)")
-    }
+	// Try to load the .env file, but ignore errors if it doesn't exist
+	err := godotenv.Load()
+	if err != nil {
+		log.Println("No .env file found (this is normal in production)")
+	}
 }
-
